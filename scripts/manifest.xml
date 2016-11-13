@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <default sync-j="4" revision="jethro"/>
+
+  <remote fetch="git://git.yoctoproject.org" name="yocto"/>
+  <remote fetch="git://git.openembedded.org" name="oe"/>
+  <remote fetch="git://github.com/meta-qt5" name="meta-qt5"/>
+  <remote fetch="git://github.com/lirios" name="liri"/>
+  <remote fetch="git://code.qt.io/yocto" name="qtyocto"/>
+  <remote fetch="git://git.yoctoproject.org" name="intel"/>
+  <remote fetch="git://github.com/openembedded" name="oe-mirror"/>
+
+  <project name="poky"
+           remote="yocto"
+           revision="jethro"
+           path="sources/poky"/>
+  <project name="meta-openembedded"
+           remote="oe-mirror"
+           revision="jethro"
+           path="sources/meta-openembedded"/>
+  <project name="meta-boot2qt"
+           remote="qtyocto"
+           revision="jethro"
+           path="sources/meta-boot2qt"/>
+  <project name="meta-qt5"
+           remote="qtyocto"
+           revision="5.7"
+           path="sources/meta-qt5"/>
+  <project name="meta-qt5-extra"
+           remote="liri"
+           revision="feature/liri"
+           path="sources/meta-qt5-extra"/>
+  <project name="meta-mingw"
+           remote="qtyocto"
+           revision="jethro"
+           path="sources/meta-mingw"/>
+
+  <project name="meta-intel"
+           remote="intel"
+           revision="jethro"
+           path="sources/meta-intel"
+           groups="notdefault,external,intel"/>
+
+</manifest>

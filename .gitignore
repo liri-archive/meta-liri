@@ -1,0 +1,8 @@
+/.repo/
+/sources/
+/downloads/
+/sstate-cache/
+/build-*/
+/build.log
+/setup-environment.sh
+/repo

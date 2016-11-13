@@ -1,0 +1,174 @@
+#!/bin/sh
+#
+# This file is part of Liri.
+#
+# Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+#
+# $BEGIN_LICENSE:GPL3+$
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+# $END_LICENSE$
+#
+
+set -e
+
+usage() {
+   echo "Usage: $(basename $0) COMMAND [ARGS]"
+   echo
+   echo "Initialize build environment:"
+   echo "  $(basename $0) init --device <name> [--reference <mirror path>] [--repo-url <url>]"
+   echo "    --device <name>: target device name or 'all'"
+   echo "    --reference <mirror path>: path to local mirror, initialized previously with '$(basename $0) mirror'"
+   echo "    --repo-url <url>: url to the repo git sources"
+   echo "Initialize local mirror:"
+   echo "  $(basename $0) mirror"
+   echo "List available devices:"
+   echo "  $(basename $0) list-devices"
+}
+
+while test -n "$1"; do
+  case "$1" in
+    "help" | "--help" | "-h")
+      usage
+      exit 0
+      ;;
+    "--reference" | "-r")
+      shift
+      REFERENCE=$1
+      ;;
+    "--device" | "-d")
+      shift
+      DEVICE=$1
+      ;;
+    "--repo-url")
+      shift
+      REPO_URL="--repo-url $1"
+      ;;
+    *)
+      if [ -n "$COMMAND" ]; then
+        echo "Unknown argument: $1"
+        usage
+        exit 1
+      fi
+      COMMAND=$1
+      ;;
+  esac
+  shift
+done
+
+if [ -z "${COMMAND}" ]; then
+    usage
+    exit 1
+fi
+
+DIR=$(readlink -f $(dirname $0))
+if [ -n "${REFERENCE}" ]; then
+    REFERENCE="--reference $(readlink -f ${REFERENCE})"
+fi
+
+if [ -z "${REPO_URL}" ]; then
+    REPO_URL="--repo-url git://github.com/theqtcompany/git-repo"
+fi
+
+get_repo() {
+  REPO="./repo"
+  if [ -n "$(command -v repo)" ]; then
+    REPO="repo"
+  elif [ ! -x "./repo" ]; then
+    curl -s https://storage.googleapis.com/git-repo-downloads/repo > "./repo"
+    chmod +x ./repo
+  fi
+}
+
+get_groups() {
+  case ${DEVICE} in
+    all)
+      PROJECT_GROUPS="external"
+    ;;
+    intel-corei7-64)
+      PROJECT_GROUPS="intel"
+    ;;
+    *)
+      echo "Unknown device configuration, including all meta layers"
+      PROJECT_GROUPS="external"
+    ;;
+  esac
+
+  PROJECT_GROUPS="${PROJECT_GROUPS} default"
+}
+
+list_devices() {
+  echo "Available device configurations:"
+  for device in $(ls $DIR/conf/distro/include/*.conf); do
+    echo "  $(basename ${device%%.conf})"
+  done
+}
+
+mirror() {
+  mkdir -p .repo/manifests
+  cp ${DIR}/scripts/manifest.xml .repo/manifests/
+  MANIFEST="manifest.xml"
+  DEVICE=${DEVICE:-all}
+  get_groups
+  ${REPO} init ${REPO_URL} -u ${PWD}/.repo/repo -b default -m ${MANIFEST} -g "${PROJECT_GROUPS}" --mirror
+  ${REPO} sync
+}
+
+init() {
+  if [ -z "${DEVICE}" ]; then
+    echo "device not defined"
+    usage
+    exit 1
+  fi
+
+  get_groups
+  mkdir -p .repo/manifests
+  rm -f .repo/manifests/manifest*.xml
+  cp ${DIR}/scripts/manifest*.xml .repo/manifests
+  if [ -f .repo/manifests/manifest_${DEVICE}.xml ]; then
+    MANIFEST="manifest_${DEVICE}.xml"
+  else
+    MANIFEST="manifest.xml"
+  fi
+  ${REPO} init ${REPO_URL} -u ${PWD}/.repo/repo -b default -m ${MANIFEST} -g "${PROJECT_GROUPS}" ${REFERENCE}
+  ${REPO} sync --optimized-fetch
+
+  if [ ! -e "sources/meta-liri" ]; then
+    ln -s ${DIR} sources/meta-liri
+  fi
+
+  if [ ! -e "setup-environment.sh" ]; then
+    ln -s ${DIR}/scripts/setup-environment.sh setup-environment.sh
+  fi
+}
+
+get_repo
+
+case "$COMMAND" in
+  "init")
+    init
+  ;;
+  "mirror")
+    mirror
+  ;;
+  "list-devices")
+    list_devices
+  ;;
+  *)
+    echo "Unknown command"
+    usage
+    exit 1
+  ;;
+esac
