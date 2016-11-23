@@ -41,7 +41,6 @@ BBLAYERS ?= " \
     ${BSPDIR}/sources/meta-openembedded/meta-gnome \
     ${BSPDIR}/sources/meta-boot2qt \
     ${BSPDIR}/sources/meta-boot2qt/meta-intel-extras \
-    ${BSPDIR}/sources/meta-mingw \
     ${BSPDIR}/sources/meta-qt5 \
     ${BSPDIR}/sources/meta-qt5-extra \
     ${BSPDIR}/sources/meta-liri \

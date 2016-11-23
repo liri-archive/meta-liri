@@ -31,10 +31,6 @@
            remote="liri"
            revision="feature/liri"
            path="sources/meta-qt5-extra"/>
-  <project name="meta-mingw"
-           remote="qtyocto"
-           revision="krogoth"
-           path="sources/meta-mingw"/>
 
   <project name="meta-intel"
            remote="intel"
