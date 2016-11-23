@@ -25,7 +25,7 @@
            path="sources/meta-boot2qt"/>
   <project name="meta-qt5"
            remote="qtyocto"
-           revision="5.7"
+           revision="5.8"
            path="sources/meta-qt5"/>
   <project name="meta-qt5-extra"
            remote="liri"
