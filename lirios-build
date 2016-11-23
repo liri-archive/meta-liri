@@ -32,4 +32,4 @@ for device in $devices; do
     [ ! -d build-${device} ] && mkdir build-${device}
 done
 
-exec sudo docker run -it --rm -v $(pwd):$(pwd) --workdir $(pwd) ubuntubuild ./scripts/build-all.sh
+time exec sudo docker run -it --rm -v $(pwd):$(pwd) --workdir $(pwd) ubuntubuild ./scripts/build-all.sh
