@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 
-  <default sync-j="4" revision="jethro"/>
+  <default sync-j="4" revision="krogoth"/>
 
   <remote fetch="git://git.yoctoproject.org" name="yocto"/>
   <remote fetch="git://git.openembedded.org" name="oe"/>
@@ -13,15 +13,15 @@
 
   <project name="poky"
            remote="yocto"
-           revision="jethro"
+           revision="krogoth"
            path="sources/poky"/>
   <project name="meta-openembedded"
            remote="oe-mirror"
-           revision="jethro"
+           revision="krogoth"
            path="sources/meta-openembedded"/>
   <project name="meta-boot2qt"
            remote="qtyocto"
-           revision="jethro"
+           revision="krogoth"
            path="sources/meta-boot2qt"/>
   <project name="meta-qt5"
            remote="qtyocto"
@@ -33,12 +33,12 @@
            path="sources/meta-qt5-extra"/>
   <project name="meta-mingw"
            remote="qtyocto"
-           revision="jethro"
+           revision="krogoth"
            path="sources/meta-mingw"/>
 
   <project name="meta-intel"
            remote="intel"
-           revision="jethro"
+           revision="krogoth"
            path="sources/meta-intel"
            groups="notdefault,external,intel"/>
 

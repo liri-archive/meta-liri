@@ -25,7 +25,7 @@ DESCRIPTION = "Liri OS"
 LICENSE = "LICENSE.GPLv3"
 PR = "r0"
 
-require recipes/images/b2qt-embedded-image.bb
+require recipes-qt/images/b2qt-embedded-qt5-image.bb
 
 IMAGE_INSTALL += " \
     alsa-plugins \

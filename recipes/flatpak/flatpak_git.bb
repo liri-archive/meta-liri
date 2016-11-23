@@ -57,7 +57,7 @@ inherit autotools pkgconfig gettext systemd
 DEPENDS = " \
     glib-2.0 json-glib libsoup-2.4 libarchive elfutils fuse \
     ostree libassuan libgpg-error bubblewrap systemd \
-    gobject-introspection-stub \
+    gobject-introspection \
 "
 
 RDEPENDS_${PN} = "bubblewrap"
