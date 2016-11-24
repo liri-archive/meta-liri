@@ -21,20 +21,6 @@
 # $END_LICENSE$
 #
 
-# We have a conf and classes directory, append to BBPATH
-BBPATH .= ":${LAYERDIR}"
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
-# We have a recipes directory, add to BBFILES
-BBFILES += " \
-    ${LAYERDIR}/recipes/*/*.bb \
-    ${LAYERDIR}/recipes/*/*.bbappend \
-    ${LAYERDIR}/recipes-devtools/*/*.bb \
-    ${LAYERDIR}/recipes-devtools/*/*.bbappend \
-"
-BBFILES += "${@bb.utils.contains("BBFILE_COLLECTIONS", "qt5-layer", "${LAYERDIR}/recipes-qt/*/*.bb ${LAYERDIR}/recipes-qt/*/*.bbappend" , "", d)}"
-
-BBFILE_COLLECTIONS += "lirios"
-BBFILE_PATTERN_lirios := "^${LAYERDIR}/"
-BBFILE_PRIORITY_lirios = "20"
-
-LICENSE_PATH += "${LAYERDIR}"
+SRC_URI += "file://0002-avoid-c-comments-in-c-code-fails-with-gcc-6.patch"
