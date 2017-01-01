@@ -25,9 +25,25 @@ DESCRIPTION = "Liri OS"
 LICENSE = "LICENSE.GPLv3"
 PR = "r0"
 
-require recipes-qt/images/b2qt-embedded-qt5-image.bb
+DEPLOY_CONF_TYPE = "Boot2Qt"
+
+IMAGE_FEATURES += " \
+    package-management \
+    ssh-server-dropbear \
+    tools-debug \
+    debug-tweaks \
+    hwcodecs \
+"
+
+inherit core-image qbsp-image
+inherit consistent_timestamps
 
 IMAGE_INSTALL += " \
+    packagegroup-b2qt-embedded-base \
+    packagegroup-b2qt-embedded-tools \
+    ${@base_contains("DISTRO_FEATURES", "gstreamer010", "packagegroup-b2qt-embedded-gstreamer010", "", d)} \
+    ${@base_contains("DISTRO_FEATURES", "gstreamer", "packagegroup-b2qt-embedded-gstreamer", "", d)} \
+    packagegroup-b2qt-qt5-modules \
     alsa-plugins \
     liri-world \
 "
