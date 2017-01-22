@@ -3,17 +3,10 @@ HOMEPAGE = "http://flatpak.org"
 LICENSE = "LGPLv2.1"
 LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 
-SRC_URI = " \
-    gitsm://git@github.com/flatpak/flatpak;protocol=https \
-    file://0001-autogen.sh-fall-back-to-no-gtkdocize-if-it-is-there-.patch \
-    file://0001-common-Allow-command-to-include-command-line-options.patch \
-    file://0001-lib-Allow-passing-command-line-argument-through-laun.patch \
-"
+inherit autotools pkgconfig gettext systemd
 
-SRCREV = "a5536d0420df8a537ab8327319a431127b0ebed7"
-
-PV = "2016.8+git${SRCPV}"
-S = "${WORKDIR}/git"
+SRC_URI = "https://github.com/flatpak/${BPN}/releases/download/${PV}/${BPN}-${PV}.tar.xz"
+SRC_URI[sha256sum] = "9de103312b86f1033fa12768dc836525d6d9385defc80306e68691df66e7edaf"
 
 PACKAGES =+ " \
     ${PN}-build \
@@ -45,14 +38,6 @@ AUTO_LIBNAME_PKGS = ""
 
 # possible package configurations
 PACKAGECONFIG ??= ""
-
-do_configure_prepend() {
-    pushd ${S}
-    NOCONFIGURE=1 ./autogen.sh
-    popd
-}
-
-inherit autotools pkgconfig gettext systemd
 
 DEPENDS = " \
     glib-2.0 json-glib libsoup-2.4 libarchive elfutils fuse \
