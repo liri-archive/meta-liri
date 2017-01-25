@@ -37,5 +37,10 @@
            revision="krogoth"
            path="sources/meta-intel"
            groups="notdefault,external,intel"/>
+  <project name="meta-raspberrypi"
+           remote="yocto"
+           revision="2745399f75d7564fcc586d0365ff73be47849d0e"
+           path="sources/meta-raspberrypi"
+           groups="notdefault,external,rpi"/>
 
 </manifest>

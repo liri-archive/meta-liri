@@ -100,6 +100,9 @@ get_groups() {
     intel-corei7-64)
       PROJECT_GROUPS="intel"
     ;;
+    raspberrypi0|raspberrypi|raspberrypi2|raspberrypi3)
+      PROJECT_GROUPS="rpi"
+    ;;
     *)
       echo "Unknown device configuration, including all meta layers"
       PROJECT_GROUPS="external"

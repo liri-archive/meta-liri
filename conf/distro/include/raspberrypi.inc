@@ -1,8 +1,7 @@
-#!/bin/bash
 #
 # This file is part of Liri.
 #
-# Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+# Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 #
 # $BEGIN_LICENSE:GPL3+$
 #
@@ -22,14 +21,22 @@
 # $END_LICENSE$
 #
 
-set -e
+IMAGE_FSTYPES += "ext3 rpi-sdimg"
 
-devices="intel-corei7-64 raspberrypi raspberrypi0 raspberrypi2 raspberrypi3"
+QBSP_IMAGE_CONTENT ?= "\
+    ${IMAGE_LINK_NAME}.img \
+    ${IMAGE_LINK_NAME}.conf \
+"
 
-./lirios-init-build-env init --device all
+MACHINE_EXTRA_INSTALL += "\
+    omxplayer \
+"
 
-for device in $devices; do
-    [ ! -d build-${device} ] && mkdir build-${device}
-done
+KERNEL_MODULE_AUTOLOAD += "snd-bcm2835 bcm2835-v4l2"
+KERNEL_MODULE_PROBECONF += "bcm2835-v4l2"
+module_conf_bcm2835-v4l2 = "options bcm2835-v4l2 gst_v4l2src_is_broken=1"
 
-exec sudo docker run -it --rm -v $(pwd):$(pwd) --workdir $(pwd) ubuntubuild ./scripts/build-all.sh
+# Video camera support
+VIDEO_CAMERA = "1"
+
+MACHINE_FEATURES += "pitft"

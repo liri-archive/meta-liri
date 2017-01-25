@@ -55,6 +55,9 @@ if [ ! -f ${PWD}/${BUILDDIRECTORY}/conf/bblayers.conf ]; then
     intel-corei7-64)
       LAYERSCONF="bblayers.conf.intel.sample"
     ;;
+    raspberrypi0|raspberrypi|raspberrypi2|raspberrypi3)
+      LAYERSCONF="bblayers.conf.rpi.sample"
+    ;;
     *)
       LAYERSCONF="bblayers.conf.sample"
       echo "Unknown MACHINE, bblayers.conf might need manual editing"
