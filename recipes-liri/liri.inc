@@ -21,6 +21,5 @@
 # $END_LICENSE$
 #
 
-LIRIOS_PV = "0.9.0"
 LIRI_GIT_BRANCH = "develop"
 SRCREV = "${AUTOREV}"

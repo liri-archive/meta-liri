@@ -22,3 +22,5 @@
 #
 
 require liri.inc
+
+PV = "0.7.0+git${SRCPV}"
