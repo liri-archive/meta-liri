@@ -33,6 +33,7 @@ for DIR in $(ls -d build-*); do
     echo "${MACHINE}:" >> ../build.log
     echo "  start: $(date)" >> ../build.log
     #bitbake lirios-image meta-toolchain-b2qt-embedded-sdk
+    bitbake -c clean lirios-image
     bitbake lirios-image
     if [ $? -ne 0 ]; then
         echo "    build failed" >> ../build.log
