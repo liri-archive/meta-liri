@@ -271,7 +271,7 @@ BB_DISKMON_DIRS = "\
 # this doesn't mean anything to you.
 CONF_VERSION = "1"
 
-INHERIT += "rm_work"
+#INHERIT += "rm_work"
 INHERIT += "image-buildinfo"
 INHERIT += "internal-build"
 
