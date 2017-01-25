@@ -40,10 +40,6 @@ BBLAYERS ?= " \
     ${BSPDIR}/sources/meta-openembedded/meta-filesystems \
     ${BSPDIR}/sources/meta-openembedded/meta-gnome \
     ${BSPDIR}/sources/meta-boot2qt \
-    ${BSPDIR}/sources/meta-boot2qt/meta-ti-extras \
-    ${BSPDIR}/sources/meta-boot2qt/meta-fsl-extras \
-    ${BSPDIR}/sources/meta-boot2qt/meta-beagleboard-extras \
-    ${BSPDIR}/sources/meta-boot2qt/meta-toradex-extras \
     ${BSPDIR}/sources/meta-qt5 \
     ${BSPDIR}/sources/meta-qt5-extra \
     ${BSPDIR}/sources/meta-liri \
