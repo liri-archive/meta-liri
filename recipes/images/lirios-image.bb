@@ -35,8 +35,7 @@ IMAGE_FEATURES += " \
     hwcodecs \
 "
 
-inherit core-image qbsp-image
-inherit consistent_timestamps
+inherit core-image consistent_timestamps
 
 IMAGE_INSTALL += " \
     packagegroup-b2qt-embedded-base \
