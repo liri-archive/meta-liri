@@ -1,7 +1,7 @@
 #
 # This file is part of Liri.
 #
-# Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+# Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 #
 # $BEGIN_LICENSE:GPL3+$
 #
@@ -21,26 +21,33 @@
 # $END_LICENSE$
 #
 
-DESCRIPTION = "Liri OS"
+DESCRIPTION = "Packagegroup for Liri OS image"
 LICENSE = "LICENSE.GPLv3"
+
 PR = "r0"
 
-DEPLOY_CONF_TYPE = "Boot2Qt"
+inherit packagegroup
 
-IMAGE_FEATURES += " \
-    package-management \
-    ssh-server-dropbear \
-    tools-debug \
-    debug-tweaks \
-    hwcodecs \
-"
+MACHINE_EXTRA_INSTALL ?= ""
 
-inherit core-image consistent_timestamps
-
-IMAGE_INSTALL += " \
-    packagegroup-lirios-base \
-    packagegroup-lirios-tools \
-    ${@base_contains("DISTRO_FEATURES", "gstreamer010", "packagegroup-b2qt-embedded-gstreamer010", "", d)} \
-    ${@base_contains("DISTRO_FEATURES", "gstreamer", "packagegroup-b2qt-embedded-gstreamer", "", d)} \
-    packagegroup-b2qt-qt5-modules \
+RDEPENDS_${PN} = " \
+    alsa-plugins \
+    kernel-modules \
+    linux-firmware \
+    ca-certificates \
+    liberation-fonts \
+    ttf-devanagari \
+    ttf-opensans \
+    ttf-dejavu-common \
+    ttf-dejavu-sans \
+    otf-noto \
+    dbus-session-init \
+    tzdata \
+    tzdata-americas \
+    tzdata-asia \
+    tzdata-europe \
+    ${@base_contains("DISTRO_FEATURES", "wayland", "weston weston-examples", "", d)} \
+    networkmanager \
+    liri-world \
+    ${MACHINE_EXTRA_INSTALL} \
 "

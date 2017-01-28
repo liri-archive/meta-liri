@@ -1,7 +1,7 @@
 #
 # This file is part of Liri.
 #
-# Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+# Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 #
 # $BEGIN_LICENSE:GPL3+$
 #
@@ -21,26 +21,29 @@
 # $END_LICENSE$
 #
 
-DESCRIPTION = "Liri OS"
+DESCRIPTION = "Additional tools packagegroup for Liri OS image"
 LICENSE = "LICENSE.GPLv3"
+
 PR = "r0"
 
-DEPLOY_CONF_TYPE = "Boot2Qt"
+inherit packagegroup
 
-IMAGE_FEATURES += " \
-    package-management \
-    ssh-server-dropbear \
-    tools-debug \
-    debug-tweaks \
-    hwcodecs \
-"
-
-inherit core-image consistent_timestamps
-
-IMAGE_INSTALL += " \
-    packagegroup-lirios-base \
-    packagegroup-lirios-tools \
-    ${@base_contains("DISTRO_FEATURES", "gstreamer010", "packagegroup-b2qt-embedded-gstreamer010", "", d)} \
-    ${@base_contains("DISTRO_FEATURES", "gstreamer", "packagegroup-b2qt-embedded-gstreamer", "", d)} \
-    packagegroup-b2qt-qt5-modules \
+RDEPENDS_${PN} = " \
+    adbd \
+    alsa-utils-amixer \
+    binutils \
+    binutils-symlinks \
+    htop \
+    i2c-tools \
+    iproute2 \
+    ldd \
+    ntp \
+    openssh-sftp-server \
+    perf \
+    rsync \
+    tslib-calibrate \
+    ${@base_contains("DISTRO_FEATURES", "systemd", "systemd-analyze", "", d)} \
+    networkmanager-adsl \
+    networkmanager-openvpn \
+    networkmanager-nmtui \
 "
