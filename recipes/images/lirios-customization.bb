@@ -21,34 +21,24 @@
 # $END_LICENSE$
 #
 
-DESCRIPTION = "Packagegroup for Liri OS image"
-LICENSE = "LICENSE.GPLv3"
+DESCRIPTION = "Custom settings for Liri OS image"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
 PR = "r0"
 
-inherit packagegroup
+inherit allarch
 
-MACHINE_EXTRA_INSTALL ?= ""
+ALLOW_EMPTY_${PN} = "1"
 
-RDEPENDS_${PN} = " \
-    alsa-plugins \
-    kernel-modules \
-    linux-firmware \
-    ca-certificates \
-    liberation-fonts \
-    ttf-devanagari \
-    ttf-opensans \
-    ttf-dejavu-common \
-    ttf-dejavu-sans \
-    otf-noto \
-    dbus-session-init \
-    tzdata \
-    tzdata-americas \
-    tzdata-asia \
-    tzdata-europe \
-    ${@base_contains("DISTRO_FEATURES", "wayland", "weston weston-examples", "", d)} \
+RDEPENDS_PN += " \
     networkmanager \
-    liri-world \
-    lirios-customization \
-    ${MACHINE_EXTRA_INSTALL} \
 "
+
+pkg_postinst_${PN} () {
+#!/bin/sh
+# Replace networkd with NetworkManager
+rm -f $D/lib/systemd/system/multi-user.target.wants/systemd-networkd.service
+rm -f $D/lib/systemd/system/sockets.target.wants/systemd-networkd.socket
+ln -s /usr/lib/systemd/system/NetworkManager.service $D/lib/systemd/system/multi-user.target.wants/NetworkManager.service
+}
