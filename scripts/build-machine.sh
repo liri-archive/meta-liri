@@ -2,7 +2,7 @@
 #
 # This file is part of Liri.
 #
-# Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+# Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 #
 # $BEGIN_LICENSE:GPL3+$
 #
@@ -22,16 +22,27 @@
 # $END_LICENSE$
 #
 
-set -e
-
-machine=$1
-[ -z "$machine" ] && machine=all
-
-if [ "$machine" = "all" ]; then
-    cmd="./scripts/build-all.sh"
-else
-    cmd="./scripts/build-machine.sh $machine"
+if [ -z "$1" ]; then
+    echo "Usage: $0 [machine]"
+    exit 1
 fi
 
-./lirios-init-build-env init --device $machine
-exec sudo docker run -it --rm -v $(pwd):$(pwd) --workdir $(pwd) ubuntubuild $cmd
+build_dir=build-$1
+
+if [ ! -d "$build_dir" ]; then
+    echo "No such directory $build_dir"
+    exit 1
+fi
+
+echo "-------------------------------------" >> build.log
+export MACHINE=${build_dir#*-}
+. ./setup-environment.sh
+
+echo "${MACHINE}:" >> ../build.log
+echo "  start: $(date)" >> ../build.log
+bitbake -c clean lirios-image
+bitbake lirios-image
+if [ $? -ne 0 ]; then
+    echo "    build failed" >> ../build.log
+fi
+echo "  end:   $(date)" >> ../build.log
