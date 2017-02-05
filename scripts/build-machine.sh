@@ -29,10 +29,7 @@ fi
 
 build_dir=build-$1
 
-if [ ! -d "$build_dir" ]; then
-    echo "No such directory $build_dir"
-    exit 1
-fi
+[ ! -d $build_dir ] && mkdir $build_dir
 
 echo "-------------------------------------" >> build.log
 export MACHINE=${build_dir#*-}
