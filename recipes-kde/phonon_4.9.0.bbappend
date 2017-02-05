@@ -1,7 +1,7 @@
 #
 # This file is part of Liri.
 #
-# Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+# Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 #
 # $BEGIN_LICENSE:GPL3+$
 #
@@ -21,19 +21,4 @@
 # $END_LICENSE$
 #
 
-# We have a conf and classes directory, append to BBPATH
-BBPATH .= ":${LAYERDIR}"
-
-# We have a recipes directory, add to BBFILES
-BBFILES += " \
-    ${LAYERDIR}/recipes*/*/*.bb \
-    ${LAYERDIR}/recipes*/*/*.bbappend \
-"
-BBFILES += "${@bb.utils.contains("BBFILE_COLLECTIONS", "qt5-layer", "${LAYERDIR}/recipes-qt/*/*.bb ${LAYERDIR}/recipes-qt/*/*.bbappend" , "", d)}"
-
-BBFILE_COLLECTIONS += "lirios"
-BBFILE_PATTERN_lirios := "^${LAYERDIR}/"
-BBFILE_PRIORITY_lirios = "20"
-
-LICENSE_PATH += "${LAYERDIR}"
-LIRIOSBASE = "${LAYERDIR}"
+PACKAGECONFIG += "pulseaudio"
