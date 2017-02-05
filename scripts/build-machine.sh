@@ -36,7 +36,7 @@ fi
 
 echo "-------------------------------------" >> build.log
 export MACHINE=${build_dir#*-}
-. ./setup-environment.sh
+. ./setup-environment.sh $build_dir
 
 echo "${MACHINE}:" >> ../build.log
 echo "  start: $(date)" >> ../build.log
