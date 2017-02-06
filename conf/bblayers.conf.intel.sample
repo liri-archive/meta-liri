@@ -45,5 +45,6 @@ BBLAYERS ?= " \
     ${BSPDIR}/sources/meta-qt5 \
     ${BSPDIR}/sources/meta-qt5-extra \
     ${BSPDIR}/sources/meta-liri \
+    ${BSPDIR}/sources/meta-liri/meta-qt5-extra \
     ${BSPDIR}/sources/meta-liri/meta-intel-extras \
 "
