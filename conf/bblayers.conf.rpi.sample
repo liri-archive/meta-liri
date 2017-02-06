@@ -46,4 +46,5 @@ BBLAYERS ?= " \
     ${BSPDIR}/sources/meta-qt5-extra \
     ${BSPDIR}/sources/meta-liri \
     ${BSPDIR}/sources/meta-liri/meta-qt5-extra \
+    ${BSPDIR}/sources/meta-liri/meta-raspberrypi-extras \
 "
