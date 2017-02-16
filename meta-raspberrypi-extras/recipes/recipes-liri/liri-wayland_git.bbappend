@@ -21,4 +21,4 @@
 # $END_LICENSE$
 #
 
-PACKAGECONFIG += "brcm"
+PACKAGECONFIG_append_rpi = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', 'kms', 'brcm', d)}"

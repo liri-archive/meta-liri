@@ -23,14 +23,14 @@
 
 IMAGE_FSTYPES += "ext3 rpi-sdimg"
 
-QBSP_IMAGE_CONTENT ?= "\
-    ${IMAGE_LINK_NAME}.img \
-    ${IMAGE_LINK_NAME}.conf \
-"
+MACHINE_FEATURES += "pitft vc4graphics"
 
 MACHINE_EXTRA_INSTALL += "\
-    omxplayer \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '', 'omxplayer', d)} \
 "
+
+# Remove splash
+IMAGE_FEATURES_remove = "splash"
 
 KERNEL_MODULE_AUTOLOAD += "snd-bcm2835 bcm2835-v4l2"
 KERNEL_MODULE_PROBECONF += "bcm2835-v4l2"
@@ -39,4 +39,12 @@ module_conf_bcm2835-v4l2 = "options bcm2835-v4l2 gst_v4l2src_is_broken=1"
 # Video camera support
 VIDEO_CAMERA = "1"
 
-MACHINE_FEATURES += "pitft"
+# Dispmanx offline compositing
+DISPMANX_OFFLINE = "1"
+
+# Preferred providers for GL
+PREFERRED_PROVIDER_virtual/egl = "${@bb.utils.contains("MACHINE_FEATURES", "vc4graphics", "mesa", "userland", d)}"
+PREFERRED_PROVIDER_virtual/libgles2 = "${@bb.utils.contains("MACHINE_FEATURES", "vc4graphics", "mesa", "userland", d)}"
+PREFERRED_PROVIDER_virtual/libgl = "${@bb.utils.contains("MACHINE_FEATURES", "vc4graphics", "mesa", "mesa-gl", d)}"
+PREFERRED_PROVIDER_virtual/mesa = "${@bb.utils.contains("MACHINE_FEATURES", "vc4graphics", "mesa", "mesa-gl", d)}"
+PREFERRED_PROVIDER_libgbm = "${@bb.utils.contains("MACHINE_FEATURES", "vc4graphics", "mesa", "mesa-gl", d)}"
