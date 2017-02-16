@@ -46,7 +46,7 @@ RDEPENDS_${PN} = " \
     tzdata-americas \
     tzdata-asia \
     tzdata-europe \
-    ${@base_contains("DISTRO_FEATURES", "wayland", "weston weston-examples", "", d)} \
+    ${@bb.utils.contains("DISTRO_FEATURES", "wayland", "weston weston-examples", "", d)} \
     networkmanager \
     liri-world \
     lirios-customization \
