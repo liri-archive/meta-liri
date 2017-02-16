@@ -5,11 +5,12 @@
 
   <remote fetch="git://git.yoctoproject.org" name="yocto"/>
   <remote fetch="git://git.openembedded.org" name="oe"/>
-  <remote fetch="git://github.com/meta-qt5" name="meta-qt5"/>
-  <remote fetch="git://github.com/lirios" name="liri"/>
-  <remote fetch="git://code.qt.io/yocto" name="qtyocto"/>
-  <remote fetch="git://git.yoctoproject.org" name="intel"/>
   <remote fetch="git://github.com/openembedded" name="oe-mirror"/>
+  <remote fetch="git://github.com/meta-qt5" name="meta-qt5"/>
+  <remote fetch="git://github.com/schnitzeltony" name="schnitzeltony"/>
+  <remote fetch="git://code.qt.io/yocto" name="qtyocto"/>
+  <remote fetch="git://github.com/lirios" name="liri"/>
+  <remote fetch="git://git.yoctoproject.org" name="intel"/>
 
   <project name="poky"
            remote="yocto"
@@ -21,15 +22,15 @@
            path="sources/meta-openembedded"/>
   <project name="meta-boot2qt"
            remote="qtyocto"
-           revision="krogoth"
+           revision="a343e1b2eec8865e0d4b9d01435a36fdda501c4b"
            path="sources/meta-boot2qt"/>
   <project name="meta-qt5"
            remote="qtyocto"
-           revision="10360a69af21297133132cba3adafe7644ef5295"
+           revision="2c3f5e50233b30c1ab778b47cc8c57a9e7e10c3e"
            path="sources/meta-qt5"/>
   <project name="meta-qt5-extra"
-           remote="liri"
-           revision="feature/liri"
+           remote="schnitzeltony"
+           revision="master"
            path="sources/meta-qt5-extra"/>
 
   <project name="meta-intel"
