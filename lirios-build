@@ -24,8 +24,25 @@
 
 set -e
 
-machine=$1
-[ -z "$machine" ] && machine=all
+machine=all
+init=0
+
+while test -n "$1"; do
+  case "$1" in
+    "--help" | "-h")
+      echo "Usage: $0 [--init] [machine name]"
+      return 0
+      ;;
+    "--init")
+      init=1
+      shift
+      ;;
+    *)
+      machine=$1
+    ;;
+  esac
+  shift
+done
 
 if [ "$machine" = "all" ]; then
     cmd="./scripts/build-all.sh"
@@ -33,5 +50,7 @@ else
     cmd="./scripts/build-machine.sh $machine"
 fi
 
-./lirios-init-build-env init --device $machine
+if [ $init -eq 1 ]; then
+    ./lirios-init-build-env init --device $machine
+fi
 exec sudo docker run -it --rm -v $(pwd):$(pwd) --workdir $(pwd) ubuntubuild $cmd
