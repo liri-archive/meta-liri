@@ -21,17 +21,13 @@
 # $END_LICENSE$
 #
 
-# Append conf directory to BBPATH
-BBPATH .= ":${LAYERDIR}"
+LIC_FILES_CHKSUM = "file://LICENCE.broadcom;md5=4a4d169737c0786fb9482bb6d30401d1"
 
-# Add recipes
-BBFILES += " \
-    ${LAYERDIR}/recipes*/*/*.bb \
-    ${LAYERDIR}/recipes*/*/*.bbappend \
-    ${LAYERDIR}/recipes*/*/*/*.bb \
-    ${LAYERDIR}/recipes*/*/*/*.bbappend \
-"
+RPIFW_DATE = "20170217"
+RPIFW_SRC_URI = "git://github.com/raspberrypi/firmware.git;protocol=git;branch=master"
+RPIFW_SRCREV = "4ff0432eded04cad51e0bdbc77ccc9e05b74b760"
+RPIFW_S = "${WORKDIR}/git"
 
-BBFILE_COLLECTIONS += "lirios_rpi"
-BBFILE_PATTERN_lirios_rpi := "^${LAYERDIR}/"
-BBFILE_PRIORITY_lirios_rpi = "20"
+SRCREV = "${RPIFW_SRCREV}"
+
+PR = "r0"

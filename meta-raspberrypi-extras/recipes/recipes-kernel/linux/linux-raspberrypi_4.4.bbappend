@@ -21,17 +21,8 @@
 # $END_LICENSE$
 #
 
-# Append conf directory to BBPATH
-BBPATH .= ":${LAYERDIR}"
+LINUX_VERSION = "4.4.49"
 
-# Add recipes
-BBFILES += " \
-    ${LAYERDIR}/recipes*/*/*.bb \
-    ${LAYERDIR}/recipes*/*/*.bbappend \
-    ${LAYERDIR}/recipes*/*/*/*.bb \
-    ${LAYERDIR}/recipes*/*/*/*.bbappend \
-"
+SRCREV = "8d1dd639a4db6ccc416bb0a00afc7a8888018b3d"
 
-BBFILE_COLLECTIONS += "lirios_rpi"
-BBFILE_PATTERN_lirios_rpi := "^${LAYERDIR}/"
-BBFILE_PRIORITY_lirios_rpi = "20"
+PR = "r0"
