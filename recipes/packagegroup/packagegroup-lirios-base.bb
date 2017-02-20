@@ -35,13 +35,14 @@ RDEPENDS_${PN} = " \
     kernel-modules \
     linux-firmware \
     ca-certificates \
+    coreutils \
+    dconf \
     liberation-fonts \
     ttf-devanagari \
     ttf-opensans \
     ttf-dejavu-common \
     ttf-dejavu-sans \
     otf-noto \
-    dbus-session-init \
     tzdata \
     tzdata-americas \
     tzdata-asia \

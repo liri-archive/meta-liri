@@ -1,7 +1,7 @@
 #
 # This file is part of Liri.
 #
-# Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+# Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 #
 # $BEGIN_LICENSE:GPL3+$
 #
@@ -21,26 +21,4 @@
 # $END_LICENSE$
 #
 
-DESCRIPTION = "Liri OS"
-LICENSE = "LICENSE.GPLv3"
-PR = "r0"
-
-DEPLOY_CONF_TYPE = "LiriOS"
-
-IMAGE_FEATURES += " \
-    package-management \
-    ssh-server-openssh \
-    tools-debug \
-    debug-tweaks \
-    hwcodecs \
-"
-
-inherit core-image consistent_timestamps
-
-IMAGE_INSTALL += " \
-    packagegroup-lirios-base \
-    packagegroup-lirios-tools \
-    ${@bb.utils.contains("DISTRO_FEATURES", "gstreamer010", "packagegroup-b2qt-embedded-gstreamer010", "", d)} \
-    ${@bb.utils.contains("DISTRO_FEATURES", "gstreamer", "packagegroup-b2qt-embedded-gstreamer", "", d)} \
-    packagegroup-b2qt-qt5-modules \
-"
+DEPENDS_append = "coreutils-native"
