@@ -39,5 +39,9 @@
            remote="yocto"
            path="sources/meta-raspberrypi"
            groups="notdefault,external,rpi"/>
+  <project name="meta-odroid"
+           remote="liri"
+           path="sources/meta-odroid"
+           groups="notdefault,external,odroid"/>
 
 </manifest>

@@ -103,6 +103,9 @@ get_groups() {
     raspberrypi0|raspberrypi|raspberrypi2|raspberrypi3)
       PROJECT_GROUPS="rpi"
     ;;
+    odroid-c1|odroid-c2)
+      PROJECT_GROUPS="odroid"
+    ;;
     *)
       echo "Unknown device configuration, including all meta layers"
       PROJECT_GROUPS="external"

@@ -58,6 +58,9 @@ if [ ! -f ${PWD}/${BUILDDIRECTORY}/conf/bblayers.conf ]; then
     raspberrypi0|raspberrypi|raspberrypi2|raspberrypi3)
       LAYERSCONF="bblayers.conf.rpi.sample"
     ;;
+    odroid-c1|odroid-c2)
+      LAYERSCONF="bblayers.conf.odroid.sample"
+    ;;
     *)
       LAYERSCONF="bblayers.conf.sample"
       echo "Unknown MACHINE, bblayers.conf might need manual editing"
