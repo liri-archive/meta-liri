@@ -271,7 +271,10 @@ BB_DISKMON_DIRS = "\
 # this doesn't mean anything to you.
 CONF_VERSION = "1"
 
-#INHERIT += "rm_work"
+# Delete temporary workspace to save a lot of disk space. This might
+# increase build time to rebuild recipes.
+INHERIT += "rm_work"
+
 INHERIT += "image-buildinfo"
 INHERIT += "internal-build"
 
