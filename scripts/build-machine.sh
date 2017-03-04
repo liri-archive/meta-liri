@@ -37,7 +37,6 @@ export MACHINE=${build_dir#*-}
 
 echo "${MACHINE}:" >> ../build.log
 echo "  start: $(date)" >> ../build.log
-bitbake -c clean lirios-image
 bitbake lirios-image
 if [ $? -ne 0 ]; then
     echo "    build failed" >> ../build.log
