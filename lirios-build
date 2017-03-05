@@ -35,7 +35,6 @@ while test -n "$1"; do
       ;;
     "--init")
       init=1
-      shift
       ;;
     *)
       machine=$1
