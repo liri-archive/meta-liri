@@ -14,29 +14,33 @@
 
   <project name="poky"
            remote="yocto"
+           revision="6a1f33cc40bfac33cf030fe41e1a8efd1e5fad6f"
            path="sources/poky"/>
   <project name="meta-openembedded"
            remote="oe-mirror"
+           revision="1efa5d623bc64659b57389e50be2568b1355d5f7"
            path="sources/meta-openembedded"/>
   <project name="meta-boot2qt"
            remote="qtyocto"
-           revision="a343e1b2eec8865e0d4b9d01435a36fdda501c4b"
+           revision="morty"
            path="sources/meta-boot2qt"/>
   <project name="meta-qt5"
            remote="qtyocto"
-           revision="2c3f5e50233b30c1ab778b47cc8c57a9e7e10c3e"
+           revision="5.8"
            path="sources/meta-qt5"/>
   <project name="meta-qt5-extra"
            remote="schnitzeltony"
-           revision="d3c2bde86c1f3c8836a820e80c64932c6a368e4d"
+           revision="master"
            path="sources/meta-qt5-extra"/>
 
   <project name="meta-intel"
            remote="intel"
+           revision="6add41510412ca196efb3e4f949d403a8b6f35d7"
            path="sources/meta-intel"
            groups="notdefault,external,intel"/>
   <project name="meta-raspberrypi"
            remote="yocto"
+           revision="cce6292e41493158c26f5b1b7fded97faacf10d7"
            path="sources/meta-raspberrypi"
            groups="notdefault,external,rpi"/>
   <project name="meta-odroid"
