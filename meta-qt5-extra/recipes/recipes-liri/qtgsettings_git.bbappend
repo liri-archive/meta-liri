@@ -23,4 +23,4 @@
 
 require liri.inc
 
-PV = "${FLUID_VERSION}+git${SRCPV}"
+PV = "${QTGSETTINGS_VERSION}+git${SRCPV}"

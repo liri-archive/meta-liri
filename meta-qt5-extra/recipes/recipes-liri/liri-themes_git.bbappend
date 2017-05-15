@@ -23,4 +23,4 @@
 
 require liri.inc
 
-PV = "0.10.0+git${SRCPV}"
+PV = "${LIRI_VERSION}+git${SRCPV}"
